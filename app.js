@@ -30,14 +30,14 @@ app.use(express.static('public'))
 
 // Auth middleware
 app.use(function (req, res, next) {
-  const user = null; // TODO
+  const user = auth.currentUser; 
   if (req.url === '/auth' && user)
     return res.redirect('/')
 
   if (req.url !== '/auth' && !user)
     return res.redirect('/auth')
 
-  next() 
+  next()
 });
 
 app.use('/', indexRouter)
