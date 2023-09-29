@@ -5,14 +5,17 @@ import bodyParser from 'body-parser'
 import logger from 'morgan'
 
 // TODO: import Firebase dependencies
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 // TODO: import Firebase application
+import firebaseApp from "firebase.js"
 
 import indexRouter from './routes/index.js'
 
 const app = express()
 
 // TODO: create Firebase module
+const auth = getAuth(firebaseApp)
 
 // view engine setup
 app.set('views', 'views')
@@ -34,7 +37,7 @@ app.use(function (req, res, next) {
   if (req.url !== '/auth' && !user)
     return res.redirect('/auth')
 
-  next()
+  next() 
 });
 
 app.use('/', indexRouter)
